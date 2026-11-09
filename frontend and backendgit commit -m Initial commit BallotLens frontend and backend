@@ -1,0 +1,27 @@
+.gitignore
+README.md
+eslint.config.js
+index.html
+package-lock.json
+package.json
+public/Nigeria election 2023_ As it happened.jpg
+public/favicon.svg
+public/icons.svg
+src/App.css
+src/App.jsx
+src/assets/hero.png
+src/assets/react.svg
+src/assets/vite.svg
+src/components/Brand.jsx
+src/components/Footer.jsx
+src/components/Header.jsx
+src/components/ScrollToHash.jsx
+src/components/SectionLabel.jsx
+src/index.css
+src/main.jsx
+src/pages/About.jsx
+src/pages/Elections.jsx
+src/pages/Evidence.jsx
+src/pages/Home.jsx
+src/pages/Methodology.jsx
+vite.config.js
