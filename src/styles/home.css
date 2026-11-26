@@ -1,0 +1,964 @@
+
+/* =========================================
+   BALLOTLENS — HOMEPAGE
+========================================= */
+
+.home-page {
+  overflow: hidden;
+  background: #ffffff;
+  color: #14233b;
+}
+
+.bl-container {
+  width: min(1280px, calc(100% - 80px));
+  margin-inline: auto;
+}
+
+.bl-hero {
+  position: relative;
+  display: flex;
+  min-height: 690px;
+  align-items: center;
+  overflow: hidden;
+  padding: 85px 0 75px;
+  background: #071a35;
+  color: #ffffff;
+}
+
+.bl-hero-glow {
+  position: absolute;
+  top: -280px;
+  right: -150px;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(45, 88, 139, 0.24) 0%,
+    rgba(7, 26, 53, 0) 70%
+  );
+  pointer-events: none;
+}
+
+.bl-hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(400px, 0.92fr);
+  align-items: center;
+  gap: 65px;
+}
+
+.bl-hero-copy {
+  max-width: 700px;
+}
+
+.bl-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: #e1c37f;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
+
+.bl-eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #dfbb68;
+  box-shadow: 0 0 15px rgba(223, 187, 104, 0.55);
+}
+
+.bl-hero h1 {
+  margin: 30px 0 25px;
+  color: #ffffff;
+  font-size: clamp(52px, 5.5vw, 78px);
+  font-weight: 750;
+  letter-spacing: -4px;
+  line-height: 1.04;
+}
+
+.bl-hero h1 span {
+  color: #dfbd72;
+}
+
+.bl-hero-description {
+  max-width: 590px;
+  margin: 0;
+  color: #c0ccdc;
+  font-size: 16px;
+  line-height: 1.95;
+}
+
+.bl-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.bl-btn {
+  display: inline-flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 0 23px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.bl-btn:hover {
+  transform: translateY(-3px);
+}
+
+.bl-btn-gold {
+  background: #dfbd72;
+  color: #071a35;
+}
+
+.bl-btn-gold:hover {
+  background: #eed39a;
+  color: #071a35;
+}
+
+.bl-btn-outline {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: #ffffff;
+}
+
+.bl-btn-outline:hover {
+  border-color: #dfbd72;
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+}
+
+.bl-hero-principles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 13px;
+  margin-top: 35px;
+  color: #aab9cc;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.bl-principle-divider {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #dfbd72;
+}
+
+/* Observation visual */
+
+.bl-observation-visual {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(218, 230, 245, 0.15);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(12px);
+}
+
+.bl-visual-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 27px;
+  border-bottom: 1px solid rgba(218, 230, 245, 0.12);
+}
+
+.bl-visual-kicker {
+  color: #dfbd72;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.bl-visual-topbar h2 {
+  margin: 10px 0 0;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+}
+
+.bl-orbit-icon {
+  display: grid;
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid rgba(223, 189, 114, 0.3);
+  border-radius: 50%;
+  color: #dfbd72;
+  font-size: 29px;
+}
+
+.bl-world-visual {
+  position: relative;
+  min-height: 330px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(34, 70, 112, 0.5),
+      rgba(7, 26, 53, 0.12) 75%
+    );
+}
+
+.bl-world-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(rgba(190, 211, 238, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(190, 211, 238, 0.12) 1px, transparent 1px);
+  background-size: 35px 35px;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+}
+
+.bl-world-lines {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 500px;
+  transform: translate(-50%, -50%);
+  color: #7894b5;
+  animation: bl-visual-appear 1s ease both;
+}
+
+.bl-map-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  transform: translate(-50%, -50%);
+  color: #dbe5f2;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bl-map-center-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(223, 189, 114, 0.45);
+  border-radius: 50%;
+  background: rgba(7, 26, 53, 0.75);
+  color: #dfbd72;
+  font-size: 28px;
+  box-shadow: 0 0 30px rgba(223, 189, 114, 0.12);
+}
+
+.bl-map-caption {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #b6c5d8;
+  font-size: 10px;
+  text-align: center;
+}
+
+.bl-map-pulse {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #dfbd72;
+}
+
+.bl-visual-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(218, 230, 245, 0.12);
+}
+
+.bl-visual-bottom > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 19px 8px;
+  color: #c6d3e4;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.bl-visual-bottom > div + div {
+  border-left: 1px solid rgba(218, 230, 245, 0.12);
+}
+
+.bl-bottom-number {
+  color: #dfbd72;
+  font-size: 10px;
+}
+
+.bl-hero-bottom-line {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #dfbd72 45%,
+    #dfbd72 55%,
+    transparent
+  );
+  opacity: 0.7;
+}
+
+/* Introduction */
+
+.bl-intro-section {
+  padding: 105px 0;
+  border-bottom: 1px solid #e9edf3;
+  background: #ffffff;
+}
+
+.bl-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  align-items: center;
+  gap: 100px;
+}
+
+.bl-section-label {
+  color: #a47b2d;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.bl-intro-section h2,
+.bl-pillars-heading h2 {
+  margin: 18px 0 0;
+  color: #092957;
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 750;
+  letter-spacing: -1.8px;
+  line-height: 1.18;
+}
+
+.bl-intro-section h2 span {
+  color: #b38b3d;
+}
+
+.bl-intro-copy p {
+  margin: 0 0 22px;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 2;
+}
+
+.bl-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #092957;
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.bl-text-link span {
+  color: #b38b3d;
+  transition: transform 0.2s ease;
+}
+
+.bl-text-link:hover span {
+  transform: translateX(4px);
+}
+
+/* Pillars */
+
+.bl-pillars-section {
+  padding: 95px 0 105px;
+  background: #f6f8fb;
+}
+
+.bl-pillars-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 35px;
+  margin-bottom: 42px;
+}
+
+.bl-pillars-heading h2 {
+  font-size: clamp(30px, 3.5vw, 42px);
+}
+
+.bl-pillars-heading > p {
+  max-width: 300px;
+  margin: 0 0 5px;
+  color: #718096;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.bl-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.bl-pillar-card {
+  position: relative;
+  min-width: 0;
+  padding: 29px 27px 30px;
+  border: 1px solid #e3e9f1;
+  border-radius: 8px;
+  background: #ffffff;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.bl-pillar-card:hover {
+  transform: translateY(-5px);
+  border-color: #d7c18e;
+  box-shadow: 0 20px 45px rgba(9, 41, 87, 0.07);
+}
+
+.bl-pillar-number {
+  color: #9a7a3d;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.bl-pillar-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  margin-top: 28px;
+  place-items: center;
+  border-radius: 8px;
+  background: #f7f1e5;
+  color: #a47b2d;
+  font-size: 26px;
+}
+
+.bl-pillar-card h3 {
+  margin: 23px 0 12px;
+  color: #092957;
+  font-size: 19px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.bl-pillar-card p {
+  min-height: 72px;
+  margin: 0 0 22px;
+  color: #718096;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.bl-pillar-card a {
+  color: #092957;
+  font-size: 12px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.bl-pillar-card a:hover {
+  color: #a47b2d;
+}
+
+/* Closing section */
+
+.bl-closing-section {
+  padding: 75px 0;
+  background: #092957;
+}
+
+.bl-closing-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+}
+
+.bl-closing-section .bl-section-label {
+  color: #dfbd72;
+}
+
+.bl-closing-section h2 {
+  margin: 18px 0 0;
+  color: #ffffff;
+  font-size: clamp(31px, 4vw, 45px);
+  font-weight: 750;
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+}
+
+/* Animation */
+
+@keyframes bl-visual-appear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -47%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 1050px) {
+  .bl-container {
+    width: calc(100% - 56px);
+  }
+
+  .bl-hero {
+    min-height: auto;
+    padding: 75px 0;
+  }
+
+  .bl-hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 0.9fr);
+    gap: 35px;
+  }
+
+  .bl-hero h1 {
+    font-size: clamp(48px, 5.6vw, 65px);
+    letter-spacing: -2.8px;
+  }
+
+  .bl-hero-description {
+    font-size: 14px;
+  }
+
+  .bl-intro-grid {
+    gap: 55px;
+  }
+
+  .bl-pillar-card {
+    padding: 24px 20px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 760px) {
+  .bl-container {
+    width: calc(100% - 36px);
+  }
+
+  .bl-hero {
+    padding: 65px 0 55px;
+  }
+
+  .bl-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .bl-hero h1 {
+    margin: 25px 0 20px;
+    font-size: clamp(43px, 10vw, 64px);
+    letter-spacing: -2.4px;
+  }
+
+  .bl-hero-description {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  .bl-hero-principles {
+    gap: 9px;
+    font-size: 10px;
+  }
+
+  .bl-observation-visual {
+    width: 100%;
+  }
+
+  .bl-world-visual {
+    min-height: 290px;
+  }
+
+  .bl-intro-section {
+    padding: 70px 0;
+  }
+
+  .bl-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .bl-intro-section h2 {
+    font-size: 38px;
+  }
+
+  .bl-pillars-section {
+    padding: 70px 0;
+  }
+
+  .bl-pillars-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .bl-pillars-heading h2 {
+    font-size: 34px;
+  }
+
+  .bl-pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .bl-pillar-card p {
+    min-height: 0;
+  }
+
+  .bl-closing-section {
+    padding: 60px 0;
+  }
+
+  .bl-closing-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .bl-closing-section h2 {
+    font-size: 34px;
+  }
+}
+
+/* Small phones */
+
+@media (max-width: 420px) {
+  .bl-container {
+    width: calc(100% - 30px);
+  }
+
+  .bl-eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.3px;
+  }
+
+  .bl-hero h1 {
+    font-size: 42px;
+    letter-spacing: -2px;
+  }
+
+  .bl-hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .bl-btn {
+    width: 100%;
+  }
+
+  .bl-visual-topbar {
+    padding: 20px;
+  }
+
+  .bl-visual-topbar h2 {
+    font-size: 20px;
+  }
+
+  .bl-visual-bottom > div {
+    flex-direction: column;
+    gap: 6px;
+    font-size: 8px;
+  }
+
+  .bl-map-center {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+
+  .bl-map-caption {
+    font-size: 9px;
+  }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .bl-world-lines {
+    animation: none;
+  }
+
+  .bl-btn,
+  .bl-pillar-card,
+  .bl-text-link span {
+    transition: none;
+  }
+}
+
+
+/* =========================================
+   NIGERIA ELECTION COUNTDOWN
+========================================= */
+
+.bl-countdown-section {
+  position: relative;
+  padding: 66px 0;
+  overflow: hidden;
+  border-bottom: 1px solid #e7eaf0;
+  background: #ffffff;
+}
+
+.bl-countdown-inner {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  gap: 65px;
+}
+
+.bl-countdown-heading h2 {
+  margin: 15px 0 12px;
+  color: #092957;
+  font-size: clamp(30px, 3.5vw, 43px);
+  font-weight: 800;
+  letter-spacing: -1.6px;
+  line-height: 1.15;
+}
+
+.bl-countdown-heading > p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.bl-countdown-content {
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid #e4e9f0;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.bl-countdown-timer {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.bl-countdown-unit {
+  min-width: 0;
+  padding: 20px 8px;
+  border: 1px solid #e5eaf1;
+  border-radius: 7px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.bl-countdown-number {
+  color: #092957;
+  font-size: clamp(29px, 4vw, 45px);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+}
+
+.bl-countdown-unit > span {
+  display: block;
+  margin-top: 9px;
+  color: #9a762f;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.bl-countdown-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 22px;
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.bl-countdown-indicator {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #b58a36;
+}
+
+.bl-countdown-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  color: #092957;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.bl-countdown-link span {
+  color: #a47b2d;
+  transition: transform 0.2s ease;
+}
+
+.bl-countdown-link:hover span {
+  transform: translate(3px, -3px);
+}
+
+.bl-countdown-finished {
+  color: #092957;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+@media (max-width: 760px) {
+  .bl-countdown-section {
+    padding: 55px 0;
+  }
+
+  .bl-countdown-inner {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .bl-countdown-heading h2 {
+    font-size: 35px;
+  }
+
+  .bl-countdown-content {
+    padding: 17px;
+  }
+
+  .bl-countdown-timer {
+    gap: 7px;
+  }
+
+  .bl-countdown-unit {
+    padding: 17px 4px;
+  }
+
+  .bl-countdown-number {
+    font-size: clamp(24px, 7vw, 36px);
+    letter-spacing: -1px;
+  }
+
+  .bl-countdown-unit > span {
+    font-size: 8px;
+    letter-spacing: 0.8px;
+  }
+}
+
+
+/* BallotLens: stronger color identity */
+
+/* Alternate the homepage backgrounds */
+.bl-intro-section {
+  background: #eaf0f7;
+  border-bottom-color: #dce5ef;
+}
+
+.bl-pillars-section {
+  background: #ffffff;
+}
+
+/* Give the election countdown a more prominent appearance */
+.bl-countdown-section {
+  background: #edf2f8;
+  border-bottom-color: #dce5ef;
+}
+
+.bl-countdown-content {
+  border-color: #d6e0ec;
+  background: #ffffff;
+}
+
+/* Stronger contrast on feature cards */
+.bl-pillar-card {
+  border-color: #dce4ee;
+  box-shadow: 0 4px 18px rgba(7, 26, 53, 0.035);
+}
+
+.bl-pillar-card:hover {
+  border-color: #d9b66c;
+  box-shadow: 0 18px 38px rgba(7, 26, 53, 0.09);
+}
+
+/* Make the transition between sections intentional */
+.bl-intro-section h2 span {
+  color: #a47b2d;
+}
+
+.bl-section-label {
+  color: #8a6726;
+}
+
+/* Keep the final call-to-action dark */
+.bl-closing-section {
+  background: #071a35;
+}
+
+/* Countdown numbers remain easy to read */
+.bl-countdown-unit {
+  background: #f8fafc;
+  border-color: #e0e7f0;
+}
+
+/* Respect smaller screens */
+@media (max-width: 760px) {
+  .bl-intro-section {
+    background: #eaf0f7;
+  }
+
+  .bl-countdown-section {
+    background: #edf2f8;
+  }
+}

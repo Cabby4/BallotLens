@@ -1,0 +1,440 @@
+@reference "tailwindcss";
+
+/* BallotLens Header styles */
+@layer components {
+  .site-header { @apply sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 shadow-[0_5px_25px_rgba(9,41,87,.05)] backdrop-blur-xl; }
+
+  .nav-container { @apply flex min-h-[82px] items-center justify-between gap-6; }
+
+  .brand { @apply inline-flex shrink-0 items-center gap-3 text-[#092957] transition; }
+
+  .brand:hover { @apply text-[#092957]; }
+
+  .brand-mark { @apply grid h-11 w-11 place-items-center rounded-2xl border border-[#d8ad57]/60 bg-[#092957] p-1.5 text-white shadow-[0_6px_16px_rgba(9,41,87,.18)]; }
+
+  .brand-mark svg { @apply h-full w-full; }
+
+  .brand-name { @apply flex flex-col text-[21px] font-black leading-none tracking-[-.06em]; }
+
+  .brand-name > span { @apply inline; }
+
+  .brand-name > span span { @apply text-[#bd8c2e]; }
+
+  .brand-name small { @apply mt-1.5 text-[8px] font-bold tracking-[.13em] text-slate-500; }
+
+  .menu-toggle { @apply hidden h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-xl text-[#092957] transition hover:border-[#d8ad57]; }
+
+  .navigation { @apply flex items-center gap-1; }
+
+  .nav-link { @apply relative rounded-xl px-3.5 py-2.5 text-[13px] font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-[#092957]; }
+
+  .nav-link.active { @apply bg-[#092957]/[.06] text-[#092957]; }
+
+  .nav-link.active::after { content: ""; @apply absolute bottom-0 left-1/2 h-[3px] w-5 -translate-x-1/2 rounded-full bg-[#d8ad57]; }
+
+  .nav-cta { @apply ml-3 inline-flex items-center gap-2 rounded-xl bg-[#092957] px-4 py-3 text-[13px] font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[#123b70] hover:text-white; }
+
+  .site-footer .brand { @apply text-white; }
+
+  .site-footer .brand-mark { @apply border-white/20 bg-white/10; }
+
+  .site-footer .brand-name small { @apply text-slate-400; }
+}
+
+
+
+/* BallotLens International branding */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e7ebf0;
+  box-shadow: 0 3px 15px rgba(11, 37, 69, 0.04);
+}
+
+.nav-container {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+/* Brand */
+
+.international-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.international-brand-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  background: #0b2545;
+  border-radius: 12px;
+  border-bottom: 3px solid #e3bc65;
+}
+
+.brand-symbol {
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.international-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.international-brand-name {
+  color: #0b2545;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.international-brand-name span {
+  color: #18794e;
+}
+
+.international-brand-tagline {
+  color: #718096;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.05px;
+  line-height: 1.4;
+}
+
+/* Navigation */
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-link {
+  position: relative;
+  padding: 9px 0;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #18794e;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  height: 2px;
+  background: #18794e;
+  border-radius: 2px;
+}
+
+/* Main action */
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #18794e;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-cta:hover {
+  background: #12623e;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* Tablet and mobile */
+
+@media (max-width: 900px) {
+  .nav-container {
+    min-height: 74px;
+    gap: 15px;
+  }
+
+  .menu-toggle {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #0b2545;
+    font-size: 23px;
+    cursor: pointer;
+  }
+
+  .navigation {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+    padding: 18px 22px 22px;
+    background: #ffffff;
+    border-top: 1px solid #e7ebf0;
+    border-bottom: 1px solid #e7ebf0;
+    box-shadow: 0 12px 22px rgba(11, 37, 69, 0.08);
+  }
+
+  .navigation.navigation-open {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 12px 5px;
+    font-size: 14px;
+  }
+
+  .nav-link.active::after {
+    display: none;
+  }
+
+  .nav-cta {
+    margin-top: 8px;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .international-brand {
+    gap: 8px;
+  }
+
+  .international-brand-icon {
+    width: 37px;
+    height: 37px;
+    border-radius: 10px;
+  }
+
+  .international-brand-name {
+    font-size: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .international-brand-tagline {
+    font-size: 7px;
+    letter-spacing: 0.7px;
+  }
+}
+
+
+/* =================================
+   BALLOTLENS INTERNATIONAL HEADER
+================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 2px solid #e3bc65;
+  box-shadow: 0 3px 15px rgba(11, 37, 69, 0.05);
+}
+
+.nav-container {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Logo */
+
+.international-brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.header-logo {
+  display: block;
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Navigation */
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav-link {
+  position: relative;
+  padding: 10px 0;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #18794e;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: #18794e;
+}
+
+/* Explore Elections button */
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #18794e;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.nav-cta:hover {
+  background: #12623e;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Mobile menu button */
+
+.menu-toggle {
+  display: none;
+}
+
+/* Tablet and mobile */
+
+@media (max-width: 900px) {
+  .nav-container {
+    min-height: 74px;
+    gap: 15px;
+  }
+
+  .header-logo {
+    width: 260px;
+  }
+
+  .menu-toggle {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #0b2545;
+    font-size: 23px;
+    cursor: pointer;
+  }
+
+  .navigation {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+    padding: 18px 22px 22px;
+    background: #ffffff;
+    border-top: 1px solid #e7ebf0;
+    border-bottom: 1px solid #e7ebf0;
+    box-shadow: 0 12px 22px rgba(11, 37, 69, 0.08);
+  }
+
+  .navigation.navigation-open {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 12px 5px;
+    font-size: 14px;
+  }
+
+  .nav-link.active::after {
+    display: none;
+  }
+
+  .nav-cta {
+    margin-top: 8px;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .header-logo {
+    width: 225px;
+  }
+}
+
+@media (max-width: 380px) {
+  .header-logo {
+    width: 195px;
+  }
+
+  .nav-container {
+    gap: 8px;
+  }
+}
+

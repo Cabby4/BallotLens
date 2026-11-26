@@ -1,0 +1,68 @@
+@reference "tailwindcss";
+
+/* BallotLens Evidence styles */
+@layer components {
+  .evidence-content { @apply bg-[#f5f7fb]; }
+
+  .evidence-heading { @apply mb-8 flex flex-col justify-between gap-5 sm:flex-row sm:items-end; }
+
+  .evidence-heading h2 { @apply mb-2 mt-1 text-3xl font-extrabold; }
+
+  .evidence-heading p { @apply mb-0 text-sm text-slate-600; }
+
+  .evidence-count { @apply flex items-center gap-3 self-start rounded-2xl border border-slate-200 bg-white px-5 py-3 sm:self-auto; }
+
+  .evidence-count strong { @apply text-2xl font-black text-[#092957]; }
+
+  .evidence-count span { @apply text-xs text-slate-500; }
+
+  .evidence-filters { @apply items-end; }
+
+  .evidence-search-field { @apply md:col-span-2 lg:col-span-1; }
+
+  .evidence-clear-button { @apply min-h-11 rounded-xl border border-slate-200 bg-white px-4 text-xs font-bold text-[#092957] transition hover:border-[#d8ad57] hover:bg-amber-50; }
+
+  .evidence-record-list { @apply grid gap-4; }
+
+  .evidence-record { @apply flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-[#d8ad57]/70 hover:shadow-md sm:p-6; }
+
+  .evidence-record-icon { @apply grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#092957]/[.06] text-2xl text-[#092957]; }
+
+  .evidence-record-main { @apply min-w-0 flex-1; }
+
+  .evidence-record-meta { @apply mb-3 flex flex-wrap items-center justify-between gap-3 text-[10px] font-bold tracking-wide text-slate-400; }
+
+  .evidence-record h3 { @apply mb-2 text-lg font-extrabold; }
+
+  .evidence-record p { @apply text-sm leading-7 text-slate-600; }
+
+  .evidence-status { @apply inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1.5 text-[10px] font-bold text-amber-800; }
+
+  .evidence-status.needs-source { @apply bg-orange-50 text-orange-800; }
+
+  .evidence-record-details { @apply flex flex-wrap gap-x-5 gap-y-2 border-t border-slate-100 pt-4 text-[11px] text-slate-500; }
+
+  .evidence-record-details strong { @apply text-slate-700; }
+
+  .evidence-empty { @apply rounded-2xl border border-dashed border-slate-300 bg-white px-5 py-12 text-center; }
+
+  .evidence-empty h3 { @apply text-lg font-extrabold; }
+
+  .evidence-empty p { @apply text-sm text-slate-500; }
+
+  .evidence-demo-footnote { @apply mt-6 rounded-xl bg-slate-100 px-4 py-3 text-xs leading-6 text-slate-500; }
+
+  .evidence-process { @apply bg-white py-16 md:py-20; }
+
+  .evidence-process > .container > h2 { @apply mb-8 mt-1 text-3xl font-extrabold; }
+
+  .evidence-process-grid { @apply grid gap-5 md:grid-cols-3; }
+
+  .evidence-process-grid article { @apply rounded-2xl border border-slate-200 bg-[#f8fafc] p-6; }
+
+  .evidence-process-grid article > span { @apply text-xs font-black tracking-[.15em] text-[#bd8c2e]; }
+
+  .evidence-process-grid h3 { @apply mb-2 mt-5 text-lg font-extrabold; }
+
+  .evidence-process-grid p { @apply mb-0 text-sm leading-7 text-slate-600; }
+}

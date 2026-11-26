@@ -1,8 +1,7 @@
 
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import Brand, { ArrowIcon } from "./Brand";
-
+import { ArrowIcon } from "./Brand";
 
 const navigation = [
   { label: "Home", to: "/" },
@@ -12,7 +11,6 @@ const navigation = [
   { label: "About", to: "/about" },
 ];
 
-
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -21,12 +19,27 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container nav-container">
-        <Brand />
+        {/* Official BallotLens International logo */}
+        <Link
+          to="/"
+          className="international-brand"
+          aria-label="BallotLens International home"
+          onClick={closeMenu}
+        >
+          <img
+            src="/ballotlens-international-logo.png"
+            alt="BallotLens International — Elections. Evidence. Accountability."
+            className="header-logo"
+          />
+        </Link>
 
+        {/* Mobile menu button */}
         <button
           className="menu-toggle"
           type="button"
-          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+          aria-label={
+            menuOpen ? "Close navigation" : "Open navigation"
+          }
           aria-expanded={menuOpen}
           aria-controls="main-navigation"
           onClick={() => setMenuOpen((open) => !open)}
@@ -34,54 +47,34 @@ export default function Header() {
           {menuOpen ? "✕" : "☰"}
         </button>
 
+        {/* Navigation links */}
         <nav
           id="main-navigation"
-          className={`navigation ${menuOpen ? "navigation-open" : ""}`}
+          className={`navigation ${
+            menuOpen ? "navigation-open" : ""
+          }`}
           aria-label="Main navigation"
         >
-          {navigation.map((item) => {
-         const isPageLink = [
-                "/",
-                "/elections",
-                "/evidence",
-                "/methodology",
-                "/about",
-                ].includes(item.to);
-
-            if (isPageLink) {
-              return (
-                <NavLink
-                  key={item.label}
-                  to={item.to}
-                  end={item.to === "/"}
-                  onClick={closeMenu}
-                  className={({ isActive }) =>
-                    `nav-link${isActive ? " active" : ""}`
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              );
-            }
-
-            return (
-              <Link
-                key={item.label}
-                to={item.to}
-                onClick={closeMenu}
-                className="nav-link"
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+          {navigation.map((item) => (
+            <NavLink
+              key={item.label}
+              to={item.to}
+              end={item.to === "/"}
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                `nav-link${isActive ? " active" : ""}`
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
 
           <Link
             className="nav-cta"
-            to="/about"
+            to="/elections"
             onClick={closeMenu}
           >
-            Our mission <ArrowIcon />
+            Explore Elections <ArrowIcon />
           </Link>
         </nav>
       </div>

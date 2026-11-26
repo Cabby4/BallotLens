@@ -1,0 +1,76 @@
+@reference "tailwindcss";
+
+/* BallotLens Elections styles */
+@layer components {
+  .page-hero, .elections-hero, .evidence-hero { @apply relative overflow-hidden bg-[#061b3b] py-16 text-white md:py-20; background-image: radial-gradient(circle at 82% 0%,rgba(216,173,87,.22),transparent 30%),linear-gradient(120deg,#061b3b,#092957); }
+
+  .page-hero::after, .elections-hero::after, .evidence-hero::after { content:""; @apply pointer-events-none absolute inset-0 opacity-20; background-image: radial-gradient(rgba(255,255,255,.4) .7px,transparent .7px); background-size: 20px 20px; mask-image: linear-gradient(90deg,transparent,black); }
+
+  .page-hero .container, .elections-hero .container, .evidence-hero .container { @apply relative z-10; }
+
+  .page-hero .section-label, .elections-hero .section-label, .evidence-hero .section-label { @apply border-white/20 bg-white/10 text-[#f0cf72]; }
+
+  .page-hero h1, .elections-hero h1, .evidence-hero h1 { @apply mb-5 max-w-4xl text-4xl font-black leading-tight tracking-[-.05em] text-white sm:text-5xl md:text-6xl; }
+
+  .page-hero h1 span, .elections-hero h1 span, .evidence-hero h1 span { @apply text-[#f0cf72]; }
+
+  .page-hero p, .elections-hero > .container > p, .evidence-hero > .container > p { @apply max-w-3xl text-base leading-8 text-slate-200; }
+
+  .elections-notice, .evidence-disclaimer { @apply mt-7 flex max-w-3xl gap-3 rounded-2xl border border-[#d8ad57]/35 bg-white/10 p-4 text-sm text-slate-100 backdrop-blur-sm; }
+
+  .elections-notice > span, .evidence-disclaimer > span { @apply mt-0.5 text-lg text-[#f0cf72]; }
+
+  .elections-notice p, .evidence-disclaimer p { @apply mb-0 text-xs leading-6 text-slate-200; }
+
+  .elections-content { @apply bg-[#f5f7fb]; }
+
+  .elections-section-heading { @apply mb-7; }
+
+  .elections-section-heading h2 { @apply mb-3 mt-1 text-3xl font-extrabold; }
+
+  .elections-section-heading p { @apply max-w-2xl text-sm text-slate-600; }
+
+  .elections-filters, .evidence-filters { @apply mb-8 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:grid-cols-2 lg:grid-cols-4; }
+
+  .elections-filters label, .evidence-filters label { @apply mb-2 block text-xs font-bold text-slate-700; }
+
+  .elections-filters input, .elections-filters select, .evidence-filters input, .evidence-filters select { @apply min-h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-[#d8ad57] focus:bg-white focus:ring-4 focus:ring-[#d8ad57]/15; }
+
+  .elections-grid { @apply grid gap-5 sm:grid-cols-2 lg:grid-cols-4; }
+
+  .election-card { @apply flex min-h-64 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_4px_20px_rgba(9,41,87,.04)] transition duration-300 hover:-translate-y-1 hover:border-[#d8ad57]/70 hover:shadow-lg; }
+
+  .election-card-icon { @apply mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-[#092957]/[.06] text-2xl text-[#092957]; }
+
+  .election-status { @apply mb-4 inline-flex w-fit rounded-full px-3 py-1.5 text-[10px] font-bold; }
+
+  .election-status-pending { @apply bg-amber-50 text-amber-800 ring-1 ring-amber-200; }
+
+  .election-status-neutral { @apply bg-slate-100 text-slate-600; }
+
+  .election-card h3 { @apply mb-2 text-lg font-extrabold; }
+
+  .election-card p { @apply mb-5 text-xs leading-6 text-slate-500; }
+
+  .election-card-footer { @apply mt-auto flex items-center justify-between border-t border-slate-100 pt-4 text-[10px] font-semibold text-slate-500; }
+
+  .elections-empty { @apply rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center; }
+
+  .elections-empty h3 { @apply text-lg font-bold; }
+
+  .elections-empty p { @apply text-sm text-slate-500; }
+
+  .election-category-note { @apply mt-8 rounded-2xl border border-[#d8ad57]/35 bg-[#d8ad57]/10 p-6; }
+
+  .election-category-note h3 { @apply mb-2 text-base font-extrabold; }
+
+  .election-category-note p { @apply mb-0 text-sm leading-7 text-slate-600; }
+
+  .elections-method-note { @apply bg-white py-14; }
+
+  .elections-method-note .container { @apply grid gap-5 md:grid-cols-2 md:items-center; }
+
+  .elections-method-note h2 { @apply mb-0 text-2xl font-extrabold; }
+
+  .elections-method-note p { @apply mb-0 text-sm leading-7 text-slate-600; }
+}
