@@ -1,0 +1,84 @@
+
+@reference "tailwindcss";
+
+@layer components {
+  .observer-auth-page {
+    @apply flex min-h-screen items-center justify-center bg-[#f1f5f9] px-4 py-12;
+  }
+
+  .observer-auth-card {
+    @apply w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-6 shadow-xl sm:p-10;
+  }
+
+  .observer-login-card {
+    @apply max-w-lg;
+  }
+
+  .observer-auth-back {
+    @apply mb-8 inline-block text-sm font-semibold text-slate-500 no-underline transition hover:text-[#18794e];
+  }
+
+  .observer-auth-brand {
+    @apply mb-10 flex items-center gap-3 text-sm font-bold text-[#092957];
+  }
+
+  .observer-auth-icon {
+    @apply flex h-11 w-11 items-center justify-center rounded-xl bg-[#092957] text-sm font-extrabold tracking-wide text-[#e3bc65];
+  }
+
+  .observer-auth-eyebrow {
+    @apply mb-3 text-xs font-bold tracking-[0.18em] text-[#18794e];
+  }
+
+  .observer-auth-card h1 {
+    @apply mb-3 text-3xl font-extrabold tracking-tight text-[#092957] sm:text-4xl;
+  }
+
+  .observer-auth-description {
+    @apply mb-8 text-sm leading-7 text-slate-600;
+  }
+
+  .observer-auth-form {
+    @apply flex flex-col;
+  }
+
+  .observer-auth-form > label:not(.observer-auth-checkbox) {
+    @apply mb-2 mt-4 text-sm font-semibold text-[#092957];
+  }
+
+  .observer-auth-form > input {
+    @apply w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-[#18794e] focus:ring-2 focus:ring-[#18794e]/15;
+  }
+
+  .observer-auth-checkbox {
+    @apply mt-6 flex items-start gap-3 text-xs leading-6 text-slate-600;
+  }
+
+  .observer-auth-checkbox input {
+    @apply mt-1 h-4 w-4 shrink-0 accent-[#18794e];
+  }
+
+  .observer-auth-submit {
+    @apply mt-7 flex w-full items-center justify-center gap-3 rounded-lg bg-[#18794e] px-5 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#126541];
+  }
+
+  .observer-auth-notice {
+    @apply mt-5 rounded-lg border border-[#e3bc65]/50 bg-[#e3bc65]/10 p-4 text-xs leading-6 text-slate-600;
+  }
+
+  .observer-auth-switch {
+    @apply mt-7 text-center text-sm text-slate-600;
+  }
+
+  .observer-auth-switch a {
+    @apply font-bold text-[#18794e] no-underline hover:underline;
+  }
+
+  .observer-auth-security {
+    @apply mt-8 rounded-lg bg-slate-50 p-4 text-xs leading-6 text-slate-500;
+  }
+
+  .observer-auth-security span {
+    @apply mr-2 text-[#18794e];
+  }
+}

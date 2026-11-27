@@ -1,0 +1,491 @@
+
+.agent-dashboard {
+  max-width: 1240px;
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+  color: #14243a;
+}
+
+.agent-dashboard-loading {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  color: #14243a;
+}
+
+.agent-dashboard-header,
+.agent-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.agent-eyebrow {
+  color: #b58b35;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.agent-dashboard-header h1 {
+  margin: 8px 0;
+  font-size: clamp(30px, 4vw, 42px);
+}
+
+.agent-dashboard-header p {
+  line-height: 1.7;
+  color: #64748b;
+}
+
+.agent-logout-button {
+  border: 1px solid #d8e0ea;
+  border-radius: 8px;
+  padding: 11px 18px;
+  background: #fff;
+  color: #14243a;
+  cursor: pointer;
+}
+
+.agent-welcome-card,
+.agent-summary-card,
+.agent-panel,
+.agent-profile-footer {
+  background: #fff;
+  border: 1px solid #e5eaf0;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgb(20 36 58 / 4%);
+}
+
+.agent-welcome-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 30px 0;
+  padding: 24px;
+}
+
+.agent-avatar {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #092957;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.agent-profile-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.agent-profile-info h2 {
+  margin: 0 0 8px;
+}
+
+.agent-profile-info p {
+  margin: 5px 0;
+  overflow-wrap: anywhere;
+  color: #64748b;
+}
+
+.agent-account-status {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.agent-account-status small {
+  color: #9a6b16;
+  font-weight: 500;
+}
+
+.agent-status-dot {
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+.agent-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.agent-summary-card {
+  padding: 24px;
+}
+
+.agent-card-icon {
+  color: #b58b35;
+  font-size: 26px;
+}
+
+.agent-summary-card p {
+  margin: 15px 0 8px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.agent-summary-card strong {
+  display: block;
+  font-size: 32px;
+}
+
+.agent-summary-card small {
+  display: block;
+  margin-top: 8px;
+  color: #7b8797;
+  line-height: 1.5;
+}
+
+.agent-dashboard-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr);
+  gap: 24px;
+}
+
+.agent-panel {
+  padding: 24px;
+}
+
+.agent-panel h2,
+.agent-profile-footer h2 {
+  margin-top: 0;
+}
+
+.agent-panel-heading p {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.agent-empty-state {
+  padding: 42px 12px;
+  text-align: center;
+}
+
+.agent-empty-state > span {
+  color: #b58b35;
+  font-size: 36px;
+}
+
+.agent-empty-state h3 {
+  margin-bottom: 8px;
+}
+
+.agent-empty-state p {
+  max-width: 420px;
+  margin: 0 auto 20px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.agent-primary-link {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 8px;
+  background: #092957;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.agent-quick-links > a {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid #edf0f4;
+  color: #14243a;
+  text-decoration: none;
+}
+
+.agent-quick-links > a:hover {
+  color: #a67c24;
+}
+
+.agent-security-note {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #f5f7fa;
+}
+
+.agent-security-note p {
+  margin-bottom: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.agent-profile-footer {
+  margin-top: 28px;
+  padding: 24px;
+}
+
+.agent-profile-footer > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.agent-profile-footer > div:last-child {
+  border-bottom: 0;
+}
+
+.agent-profile-footer span {
+  color: #64748b;
+}
+
+.agent-profile-footer strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .agent-dashboard {
+    padding: 32px 16px 48px;
+  }
+
+  .agent-dashboard-header {
+    align-items: flex-start;
+  }
+
+  .agent-dashboard-header,
+  .agent-welcome-card {
+    flex-wrap: wrap;
+  }
+
+  .agent-account-status {
+    width: 100%;
+  }
+
+  .agent-summary-grid,
+  .agent-dashboard-content {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-profile-footer > div {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .agent-profile-footer strong {
+    text-align: left;
+  }
+}
+
+
+.agent-upload-panel {
+  margin-bottom: 28px;
+}
+
+.agent-upload-panel > p {
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.agent-upload-form {
+  display: grid;
+  gap: 10px;
+  max-width: 650px;
+  margin-top: 24px;
+}
+
+.agent-upload-form label {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.agent-upload-form input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #d8e0ea;
+  border-radius: 8px;
+  background: #fff;
+  color: #14243a;
+  font: inherit;
+}
+
+.agent-upload-form input:focus {
+  outline: 2px solid #b58b35;
+  outline-offset: 2px;
+}
+
+.agent-upload-help {
+  color: #64748b;
+}
+
+.agent-upload-button {
+  width: fit-content;
+  margin-top: 12px;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.agent-upload-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.agent-upload-error,
+.agent-upload-success {
+  padding: 12px;
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+.agent-upload-error {
+  background: #fff1f0;
+  color: #b42318;
+}
+
+.agent-upload-success {
+  background: #ecfdf3;
+  color: #067647;
+}
+
+.agent-submission-list {
+  display: grid;
+  gap: 12px;
+}
+
+.agent-submission-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.agent-submission-item p,
+.agent-submission-item small {
+  color: #64748b;
+  overflow-wrap: anywhere;
+}
+
+.agent-submission-status {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #fff7e6;
+  color: #8a6116;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+@media (max-width: 520px) {
+  .agent-submission-item {
+    flex-direction: column;
+  }
+}
+
+
+/* Prominent Submit Result Sheet section */
+.agent-upload-panel {
+  border-top: 5px solid #b58b35;
+  padding: 30px;
+  margin-bottom: 30px;
+  background: #ffffff;
+  box-shadow: 0 10px 32px rgb(9 41 87 / 8%);
+}
+
+.agent-upload-panel h2 {
+  margin: 0 0 12px;
+  color: #092957;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.6px;
+}
+
+.agent-upload-panel > p {
+  margin-bottom: 24px;
+  color: #475569;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.agent-upload-form {
+  max-width: 700px;
+  gap: 12px;
+}
+
+.agent-upload-form label {
+  margin-top: 12px;
+  color: #092957;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.agent-upload-form input {
+  padding: 14px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  font-size: 15px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.agent-upload-form input:focus {
+  border-color: #b58b35;
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(181 139 53 / 16%);
+}
+
+.agent-upload-help {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.agent-upload-button {
+  width: 100%;
+  justify-content: center;
+  padding: 16px 22px;
+  margin-top: 18px;
+  border-radius: 9px;
+  background: #092957;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  box-shadow: 0 5px 14px rgb(9 41 87 / 18%);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.agent-upload-button:hover:not(:disabled) {
+  background: #123b70;
+  transform: translateY(-1px);
+}
+
+.agent-upload-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+@media (max-width: 600px) {
+  .agent-upload-panel {
+    padding: 22px 18px;
+  }
+
+  .agent-upload-panel h2 {
+    font-size: 24px;
+  }
+}

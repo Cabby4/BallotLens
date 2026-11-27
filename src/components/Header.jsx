@@ -9,6 +9,7 @@ const navigation = [
   { label: "Evidence", to: "/evidence" },
   { label: "Methodology", to: "/methodology" },
   { label: "About", to: "/about" },
+  { label: "Live Results", to: "/results" }
 ];
 
 export default function Header() {

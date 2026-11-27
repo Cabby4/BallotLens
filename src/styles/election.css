@@ -1,76 +1,590 @@
+
 @reference "tailwindcss";
 
-/* BallotLens Elections styles */
+/* BallotLens Elections page */
+
 @layer components {
-  .page-hero, .elections-hero, .evidence-hero { @apply relative overflow-hidden bg-[#061b3b] py-16 text-white md:py-20; background-image: radial-gradient(circle at 82% 0%,rgba(216,173,87,.22),transparent 30%),linear-gradient(120deg,#061b3b,#092957); }
+  /* Hero */
+  .elections-hero {
+    @apply relative overflow-hidden bg-[#061b3b] py-16 text-white md:py-24;
+    background-image:
+      radial-gradient(circle at 80% 35%, rgba(24, 121, 78, 0.24), transparent 28%),
+      radial-gradient(circle at 10% 0%, rgba(216, 173, 87, 0.15), transparent 30%),
+      linear-gradient(120deg, #061b3b, #092957);
+  }
 
-  .page-hero::after, .elections-hero::after, .evidence-hero::after { content:""; @apply pointer-events-none absolute inset-0 opacity-20; background-image: radial-gradient(rgba(255,255,255,.4) .7px,transparent .7px); background-size: 20px 20px; mask-image: linear-gradient(90deg,transparent,black); }
+  .elections-hero::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 opacity-20;
+    background-image: radial-gradient(rgba(255,255,255,.4) .7px, transparent .7px);
+    background-size: 20px 20px;
+    mask-image: linear-gradient(90deg, transparent, black);
+  }
 
-  .page-hero .container, .elections-hero .container, .evidence-hero .container { @apply relative z-10; }
+  .elections-hero .container {
+    @apply relative z-10;
+  }
 
-  .page-hero .section-label, .elections-hero .section-label, .evidence-hero .section-label { @apply border-white/20 bg-white/10 text-[#f0cf72]; }
+  .elections-hero-inner {
+    @apply grid items-center gap-12 lg:grid-cols-[1.15fr_.85fr];
+  }
 
-  .page-hero h1, .elections-hero h1, .evidence-hero h1 { @apply mb-5 max-w-4xl text-4xl font-black leading-tight tracking-[-.05em] text-white sm:text-5xl md:text-6xl; }
+  .elections-hero-copy {
+    @apply relative z-10;
+  }
 
-  .page-hero h1 span, .elections-hero h1 span, .evidence-hero h1 span { @apply text-[#f0cf72]; }
+  .elections-hero .section-label {
+    @apply border border-white/20 bg-white/10 text-[#f0cf72];
+  }
 
-  .page-hero p, .elections-hero > .container > p, .evidence-hero > .container > p { @apply max-w-3xl text-base leading-8 text-slate-200; }
+  .elections-hero h1 {
+    @apply mb-6 mt-5 max-w-3xl text-4xl font-black leading-[1.08] tracking-[-.045em] text-white sm:text-5xl md:text-6xl;
+  }
 
-  .elections-notice, .evidence-disclaimer { @apply mt-7 flex max-w-3xl gap-3 rounded-2xl border border-[#d8ad57]/35 bg-white/10 p-4 text-sm text-slate-100 backdrop-blur-sm; }
+  .elections-hero h1 span {
+    @apply text-[#f0cf72];
+  }
 
-  .elections-notice > span, .evidence-disclaimer > span { @apply mt-0.5 text-lg text-[#f0cf72]; }
+  .elections-hero-copy > p {
+    @apply mb-8 max-w-xl text-base leading-8 text-slate-200 md:text-lg;
+  }
 
-  .elections-notice p, .evidence-disclaimer p { @apply mb-0 text-xs leading-6 text-slate-200; }
+  .elections-primary-btn {
+    @apply inline-flex items-center gap-4 rounded-xl bg-[#18794e] px-6 py-4 text-sm font-bold text-white no-underline shadow-lg transition duration-300 hover:-translate-y-1 hover:bg-[#126541] hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-green-300/30;
+  }
 
-  .elections-content { @apply bg-[#f5f7fb]; }
+  .elections-primary-btn span {
+    @apply text-lg;
+  }
 
-  .elections-section-heading { @apply mb-7; }
+  .elections-hero-note {
+    @apply mt-7 flex items-center gap-2 text-xs font-medium text-slate-300;
+  }
 
-  .elections-section-heading h2 { @apply mb-3 mt-1 text-3xl font-extrabold; }
+  .elections-hero-note > span {
+    @apply text-[#f0cf72];
+    font-size: 9px;
+  }
 
-  .elections-section-heading p { @apply max-w-2xl text-sm text-slate-600; }
+  /* Abstract global visual */
+  .elections-hero-visual {
+    @apply relative mx-auto grid w-full max-w-md place-items-center;
+    min-height: 330px;
+  }
 
-  .elections-filters, .evidence-filters { @apply mb-8 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:grid-cols-2 lg:grid-cols-4; }
+  .globe-ring {
+    @apply absolute rounded-full border;
+    border-color: rgba(255,255,255,.15);
+  }
 
-  .elections-filters label, .evidence-filters label { @apply mb-2 block text-xs font-bold text-slate-700; }
+  .globe-ring-one {
+    width: 270px;
+    height: 270px;
+    animation: globe-pulse 7s ease-in-out infinite;
+  }
 
-  .elections-filters input, .elections-filters select, .evidence-filters input, .evidence-filters select { @apply min-h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-[#d8ad57] focus:bg-white focus:ring-4 focus:ring-[#d8ad57]/15; }
+  .globe-ring-two {
+    width: 220px;
+    height: 220px;
+    border-color: rgba(216,173,87,.35);
+    animation: globe-pulse 7s ease-in-out infinite reverse;
+  }
 
-  .elections-grid { @apply grid gap-5 sm:grid-cols-2 lg:grid-cols-4; }
+  .globe-center {
+    @apply relative z-10 flex flex-col items-center justify-center rounded-full border border-white/15 text-center shadow-2xl;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle at 35% 25%, #174b70, #092957 70%);
+    box-shadow: 0 0 70px rgba(24,121,78,.2);
+  }
 
-  .election-card { @apply flex min-h-64 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_4px_20px_rgba(9,41,87,.04)] transition duration-300 hover:-translate-y-1 hover:border-[#d8ad57]/70 hover:shadow-lg; }
+  .globe-symbol {
+    @apply mb-2 text-5xl text-[#f0cf72];
+    line-height: 1;
+  }
 
-  .election-card-icon { @apply mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-[#092957]/[.06] text-2xl text-[#092957]; }
+  .globe-label {
+    @apply text-[10px] font-extrabold tracking-[.25em] text-white;
+  }
 
-  .election-status { @apply mb-4 inline-flex w-fit rounded-full px-3 py-1.5 text-[10px] font-bold; }
+  .globe-point {
+    @apply absolute z-20 h-3 w-3 rounded-full border-2 border-white;
+    background: #18794e;
+    box-shadow: 0 0 18px rgba(24,121,78,.8);
+  }
 
-  .election-status-pending { @apply bg-amber-50 text-amber-800 ring-1 ring-amber-200; }
+  .globe-point-one {
+    top: 24%;
+    left: 24%;
+  }
 
-  .election-status-neutral { @apply bg-slate-100 text-slate-600; }
+  .globe-point-two {
+    top: 34%;
+    right: 18%;
+    background: #d8ad57;
+    box-shadow: 0 0 18px rgba(216,173,87,.7);
+  }
 
-  .election-card h3 { @apply mb-2 text-lg font-extrabold; }
+  .globe-point-three {
+    right: 30%;
+    bottom: 20%;
+  }
 
-  .election-card p { @apply mb-5 text-xs leading-6 text-slate-500; }
+  .globe-caption {
+    @apply absolute bottom-0 flex items-center gap-2 rounded-full border border-white/10 bg-white/[.06] px-4 py-3 text-xs text-slate-200 backdrop-blur-sm;
+  }
 
-  .election-card-footer { @apply mt-auto flex items-center justify-between border-t border-slate-100 pt-4 text-[10px] font-semibold text-slate-500; }
+  .globe-caption-dot {
+    @apply h-2 w-2 rounded-full bg-[#d8ad57];
+  }
 
-  .elections-empty { @apply rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center; }
+  @keyframes globe-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: .75;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+  }
 
-  .elections-empty h3 { @apply text-lg font-bold; }
+  /* Election directory */
+  .elections-directory {
+    @apply bg-[#f4f7fa] py-14 md:py-20;
+  }
 
-  .elections-empty p { @apply text-sm text-slate-500; }
+  .elections-section-heading {
+    @apply mb-8 flex flex-col justify-between gap-5 sm:flex-row sm:items-end;
+  }
 
-  .election-category-note { @apply mt-8 rounded-2xl border border-[#d8ad57]/35 bg-[#d8ad57]/10 p-6; }
+  .elections-section-heading h2 {
+    @apply mb-3 mt-3 text-2xl font-extrabold tracking-tight text-[#092957] sm:text-3xl;
+  }
 
-  .election-category-note h3 { @apply mb-2 text-base font-extrabold; }
+  .elections-section-heading p {
+    @apply mb-0 max-w-2xl text-sm leading-7 text-slate-600;
+  }
 
-  .election-category-note p { @apply mb-0 text-sm leading-7 text-slate-600; }
+  .directory-count {
+    @apply flex shrink-0 items-center gap-2 self-start rounded-full border border-slate-200 bg-white px-4 py-2 text-xs text-slate-500 sm:self-auto;
+  }
 
-  .elections-method-note { @apply bg-white py-14; }
+  .directory-count span:first-child {
+    @apply font-extrabold text-[#092957];
+  }
 
-  .elections-method-note .container { @apply grid gap-5 md:grid-cols-2 md:items-center; }
+  /* Search and filters */
+  .elections-toolbar {
+    @apply mb-8 grid gap-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:grid-cols-[1fr_240px] md:p-6;
+  }
 
-  .elections-method-note h2 { @apply mb-0 text-2xl font-extrabold; }
+  .elections-search,
+  .elections-type-filter {
+    @apply min-w-0;
+  }
 
-  .elections-method-note p { @apply mb-0 text-sm leading-7 text-slate-600; }
+  .elections-toolbar label {
+    @apply mb-2 block text-xs font-bold text-slate-700;
+  }
+
+  .elections-search-field {
+    @apply flex min-h-12 items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 transition focus-within:border-[#18794e] focus-within:bg-white focus-within:ring-4 focus-within:ring-green-700/10;
+  }
+
+  .elections-search-field > span {
+    @apply text-xl text-slate-400;
+  }
+
+  .elections-search-field input {
+    @apply min-w-0 flex-1 border-0 bg-transparent py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400;
+  }
+
+  .elections-type-filter select {
+    @apply min-h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm text-slate-800 outline-none transition focus:border-[#18794e] focus:bg-white focus:ring-4 focus:ring-green-700/10;
+  }
+
+  /* Election cards */
+  .elections-grid {
+    @apply grid gap-5 sm:grid-cols-2 xl:grid-cols-3;
+  }
+
+  .election-card {
+    @apply flex min-h-64 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#18794e]/40 hover:shadow-xl;
+    animation: election-card-enter .45s ease both;
+  }
+
+  .election-card-featured {
+    border-top: 3px solid #18794e;
+  }
+
+  .election-card-top {
+    @apply flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4;
+  }
+
+  .election-country {
+    @apply flex items-center gap-2 text-xs font-bold text-slate-700;
+  }
+
+  .country-code {
+    @apply grid h-8 w-9 place-items-center rounded-lg bg-[#092957] text-[10px] font-extrabold tracking-wider text-white;
+  }
+
+  .election-status {
+    @apply inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[10px] font-bold;
+  }
+
+  .status-dot {
+    @apply h-1.5 w-1.5 rounded-full bg-current;
+  }
+
+  .election-status-active {
+    @apply bg-emerald-50 text-emerald-800 ring-1 ring-emerald-200;
+  }
+
+  .election-status-pending {
+    @apply bg-amber-50 text-amber-800 ring-1 ring-amber-200;
+  }
+
+  .election-status-neutral {
+    @apply bg-slate-100 text-slate-600;
+  }
+
+  .election-card-body {
+    @apply flex-1 py-5;
+  }
+
+  .election-type-label {
+    @apply mb-3 inline-block rounded-md bg-[#092957]/[.06] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#092957];
+  }
+
+  .election-card h3 {
+    @apply mb-3 text-lg font-extrabold leading-snug text-[#092957];
+  }
+
+  .election-card p {
+    @apply mb-0 text-xs leading-6 text-slate-500;
+  }
+
+  .election-card-footer {
+    @apply mt-auto flex items-center justify-between gap-3 border-t border-slate-100 pt-4 text-[10px] font-semibold leading-5 text-slate-500;
+  }
+
+  .election-card-arrow {
+    @apply grid h-8 w-8 shrink-0 place-items-center rounded-full bg-slate-50 text-base text-[#18794e] transition duration-300;
+  }
+
+  .election-card:hover .election-card-arrow {
+    @apply bg-[#18794e] text-white;
+  }
+
+  /* Empty search state */
+  .elections-empty {
+    @apply col-span-full rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center;
+  }
+
+  .elections-empty > span {
+    @apply text-3xl text-slate-400;
+  }
+
+  .elections-empty h3 {
+    @apply mb-2 mt-3 text-lg font-bold text-[#092957];
+  }
+
+  .elections-empty p {
+    @apply mb-5 text-sm text-slate-500;
+  }
+
+  .elections-empty button {
+    @apply rounded-lg bg-[#092957] px-4 py-2.5 text-xs font-bold text-white transition hover:bg-[#18794e] focus:outline-none focus:ring-4 focus:ring-green-700/20;
+  }
+
+  /* Data transparency notice */
+  .elections-data-notice {
+    @apply mt-8 flex items-start gap-4 rounded-2xl border border-[#d8ad57]/40 bg-[#d8ad57]/10 p-5 sm:p-6;
+  }
+
+  .notice-icon {
+    @apply grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#d8ad57]/20 text-sm font-extrabold text-[#805b16];
+  }
+
+  .elections-data-notice strong {
+    @apply text-sm font-extrabold text-[#092957];
+  }
+
+  .elections-data-notice p {
+    @apply mb-0 mt-2 text-xs leading-6 text-slate-600;
+  }
+
+  /* Methodology section */
+  .elections-principles {
+    @apply border-t border-slate-100 bg-white py-12 md:py-16;
+  }
+
+  .elections-principles-inner {
+    @apply grid gap-5 md:grid-cols-[1fr_1.2fr] md:items-center;
+  }
+
+  .elections-principles .section-label {
+    @apply border border-[#18794e]/15 bg-[#18794e]/[.06] text-[#18794e];
+  }
+
+  .elections-principles h2 {
+    @apply mb-0 mt-3 text-2xl font-extrabold tracking-tight text-[#092957] sm:text-3xl;
+  }
+
+  .elections-principles-inner > p {
+    @apply mb-0 text-sm leading-7 text-slate-600;
+  }
+
+  .elections-method-link {
+    @apply inline-flex w-fit items-center gap-2 text-sm font-bold text-[#18794e] no-underline transition hover:gap-3 hover:text-[#092957] md:col-start-2;
+  }
+
+  @keyframes election-card-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .elections-hero {
+    padding-top: 3.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .elections-hero-visual {
+    min-height: 285px;
+  }
+
+  .globe-ring-one {
+    width: 230px;
+    height: 230px;
+  }
+
+  .globe-ring-two {
+    width: 185px;
+    height: 185px;
+  }
+
+  .globe-center {
+    width: 155px;
+    height: 155px;
+  }
+
+  .elections-directory {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .elections-card,
+  .election-card {
+    min-height: auto;
+  }
+
+  .elections-data-notice {
+    padding: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .election-card,
+  .globe-ring {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+@layer components {
+  .election-coverage {
+    @apply border-t border-slate-200 bg-white py-14 md:py-20;
+  }
+
+  .election-coverage .elections-section-heading {
+    @apply mb-8;
+  }
+
+  .election-coverage-grid {
+    @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .coverage-card {
+    @apply rounded-2xl border border-slate-200 bg-[#f8fafc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#18794e]/40 hover:bg-white hover:shadow-lg;
+  }
+
+  .coverage-card-top {
+    @apply mb-5 flex items-center justify-between;
+  }
+
+  .coverage-number {
+    @apply text-xs font-extrabold tracking-widest text-slate-400;
+  }
+
+  .coverage-icon {
+    @apply grid h-11 w-11 place-items-center rounded-xl bg-[#092957]/[.06] text-xl text-[#18794e];
+  }
+
+  .coverage-card h3 {
+    @apply mb-2 text-base font-extrabold text-[#092957];
+  }
+
+  .coverage-card p {
+    @apply mb-5 text-xs leading-6 text-slate-600;
+  }
+
+  .coverage-status {
+    @apply inline-flex rounded-full bg-amber-50 px-3 py-1.5 text-[10px] font-bold text-amber-800 ring-1 ring-amber-200;
+  }
+
+  .coverage-hierarchy {
+    @apply mt-8 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-[#f4f7fa] p-5 text-xs font-bold text-[#092957];
+  }
+
+  .coverage-hierarchy span:nth-child(even) {
+    @apply text-[#18794e];
+  }
+}
+
+
+@layer components {
+  .observer-submission-section {
+    @apply border-t border-slate-200 bg-[#f4f7fa] py-14 md:py-20;
+  }
+
+  .observer-submission-heading {
+    @apply mb-9 max-w-2xl;
+  }
+
+  .observer-submission-heading h2 {
+    @apply mb-3 mt-3 text-3xl font-extrabold tracking-tight text-[#092957];
+  }
+
+  .observer-submission-heading > p {
+    @apply mb-0 text-sm leading-7 text-slate-600;
+  }
+
+  .observer-submission-grid {
+    @apply grid gap-6 lg:grid-cols-2;
+  }
+
+  .observer-submission-card {
+    @apply flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-8;
+  }
+
+  .observer-upload-card {
+    @apply border-t-4 border-t-[#18794e];
+  }
+
+  .observer-tip-card {
+    @apply border-t-4 border-t-[#d8ad57];
+  }
+
+  .observer-submission-icon {
+    @apply mb-5 grid h-12 w-12 place-items-center rounded-xl bg-[#092957]/[.06] text-2xl font-bold text-[#18794e];
+  }
+
+  .observer-card-label {
+    @apply mb-3 text-[10px] font-extrabold tracking-[.16em] text-[#18794e];
+  }
+
+  .observer-tip-card .observer-card-label {
+    @apply text-[#805b16];
+  }
+
+  .observer-submission-card h3 {
+    @apply mb-3 text-xl font-extrabold text-[#092957];
+  }
+
+  .observer-submission-card > p {
+    @apply mb-5 text-sm leading-7 text-slate-600;
+  }
+
+  .observer-submission-card ul {
+    @apply mb-6 list-none space-y-3 p-0;
+  }
+
+  .observer-submission-card li {
+    @apply flex items-start gap-3 text-xs leading-6 text-slate-700;
+  }
+
+  .observer-submission-card li::before {
+    content: "✓";
+    @apply font-extrabold text-[#18794e];
+  }
+
+  .observer-access-notice {
+    @apply mt-auto flex items-start gap-3 rounded-xl border border-[#18794e]/15 bg-[#18794e]/[.05] p-4 text-xs leading-6 text-slate-700;
+  }
+
+  .observer-tip-notice {
+    @apply mt-auto rounded-xl border border-[#d8ad57]/30 bg-[#d8ad57]/10 p-4 text-xs leading-6 text-slate-700;
+  }
+
+  .observer-review-flow {
+    @apply mt-8 rounded-2xl bg-[#092957] p-6 text-white sm:p-8;
+  }
+
+  .observer-review-title > span {
+    @apply text-[10px] font-extrabold tracking-[.18em] text-[#f0cf72];
+  }
+
+  .observer-review-title h3 {
+    @apply mb-7 mt-3 text-xl font-extrabold text-white sm:text-2xl;
+  }
+
+  .observer-review-steps {
+    @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-4;
+  }
+
+  .observer-review-steps > div {
+    @apply border-l-2 border-[#18794e] pl-4;
+  }
+
+  .observer-review-steps > div > span {
+    @apply mb-3 block text-xs font-extrabold text-[#f0cf72];
+  }
+
+  .observer-review-steps strong {
+    @apply block text-sm font-bold text-white;
+  }
+
+  .observer-review-steps p {
+    @apply mb-0 mt-2 text-xs leading-6 text-slate-300;
+  }
+}
+
+
+
+@layer components {
+  .observer-access-actions {
+    @apply mt-auto rounded-xl border border-[#18794e]/15 bg-[#18794e]/[.05] p-4;
+  }
+
+  .observer-access-actions > p {
+    @apply mb-4 text-xs leading-6 text-slate-600;
+  }
+
+  .observer-auth-buttons {
+    @apply flex flex-wrap gap-3;
+  }
+
+  .observer-signup-button {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[#18794e] px-4 py-3 text-xs font-bold text-white no-underline transition hover:-translate-y-0.5 hover:bg-[#126541];
+  }
+
+  .observer-login-button {
+    @apply inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-3 text-xs font-bold text-[#092957] no-underline transition hover:border-[#18794e] hover:bg-slate-50;
+  }
+
+  .observer-approval-note {
+    @apply mt-4 block text-[11px] leading-5 text-slate-500;
+  }
 }
