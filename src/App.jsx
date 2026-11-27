@@ -14,6 +14,9 @@ import ObserverLogin from "./pages/ObserverLogin";
 import ScrollToHash from "./components/ScrollToHash";
 import Results from "./pages/Results";
 import AgentDashboard from "./pages/AgentDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminLogin from "./pages/AdminLogin";
+import AdminResultSheets from "./pages/AdminResultSheets";
 
 export default function App() {
   return (
@@ -43,6 +46,21 @@ export default function App() {
         <Route
           path="/agent/dashboard"
           element={<AgentDashboard />}
+        />
+        {/* Admin Dashboard */}
+        <Route
+          path="/admin/dashboard"
+          element={<AdminDashboard />}
+        />
+        {/* Admin Login */}
+        <Route
+          path="/admin/login"
+          element={<AdminLogin />}
+        />
+        {/* Admin Result Sheets */}
+        <Route
+          path="/admin/result-sheets"
+          element={<AdminResultSheets />}
         />
       </Routes>
 

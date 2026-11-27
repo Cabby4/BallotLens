@@ -12,4 +12,5 @@
 @import "./styles/responsive.css";
 @import "./styles/observer-auth.css";
 @import "./styles/result.css";
-
+@import "./styles/agent-dashboard.css";
+@import "./styles/admin-login.css";
