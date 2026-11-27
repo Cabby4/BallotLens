@@ -489,3 +489,82 @@
     font-size: 24px;
   }
 }
+
+
+.agent-history-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.agent-history-heading h2 {
+  color: #092957;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.agent-history-heading p {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.agent-history-count {
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #eef3fa;
+  color: #092957;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.agent-submission-details {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.agent-submission-details p {
+  margin: 7px 0;
+  color: #475569;
+  font-size: 14px;
+}
+
+.agent-submission-details small {
+  display: block;
+  margin-top: 10px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.agent-reviewer-notes {
+  margin-top: 12px !important;
+  padding: 12px;
+  border-left: 3px solid #b58b35;
+  border-radius: 4px;
+  background: #fffbeb;
+}
+
+.status-verified,
+.status-published,
+.status-approved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+@media (max-width: 600px) {
+  .agent-history-heading {
+    flex-direction: column;
+  }
+
+  .agent-submission-item {
+    flex-direction: column;
+  }
+}

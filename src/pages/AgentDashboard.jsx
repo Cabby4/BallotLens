@@ -18,6 +18,46 @@ export default function AgentDashboard() {
   const [uploadMessage, setUploadMessage] = useState("");
   const [uploadError, setUploadError] = useState("");
   const [submittedSheets, setSubmittedSheets] = useState([]);
+  const [historyLoading, setHistoryLoading] = useState(true);
+  const [historyError, setHistoryError] = useState("");
+
+  async function loadHistory(token) {
+    setHistoryLoading(true);
+    setHistoryError("");
+
+    try {
+      const response = await fetch(`${API_URL}/result-sheets/mine`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.status === 401) {
+        localStorage.removeItem("ballotLensToken");
+        localStorage.removeItem("ballotLensUser");
+        navigate("/observer/login", { replace: true });
+        return;
+      }
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message || "Unable to load submission history."
+        );
+      }
+
+      setSubmittedSheets(
+        Array.isArray(data.resultSheets) ? data.resultSheets : []
+      );
+    } catch (error) {
+      setHistoryError(
+        error.message || "Unable to load submission history."
+      );
+    } finally {
+      setHistoryLoading(false);
+    }
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("ballotLensToken");
@@ -33,7 +73,11 @@ export default function AgentDashboard() {
     } catch {
       localStorage.removeItem("ballotLensUser");
       navigate("/observer/login", { replace: true });
+      setHistoryLoading(false);
+      return;
     }
+
+    loadHistory(token);
   }, [navigate]);
 
   function handleLogout() {
@@ -52,7 +96,9 @@ export default function AgentDashboard() {
       return;
     }
 
-    if (!["image/jpeg", "image/png", "image/webp"].includes(resultFile.type)) {
+    if (
+      !["image/jpeg", "image/png", "image/webp"].includes(resultFile.type)
+    ) {
       setUploadError("Only JPG, PNG, and WEBP images are allowed.");
       return;
     }
@@ -100,16 +146,17 @@ export default function AgentDashboard() {
         );
       }
 
-      setUploadMessage(data.message || "Result sheet submitted successfully.");
-      setSubmittedSheets((previous) => [
-        data.resultSheet,
-        ...previous,
-      ]);
+      setUploadMessage(
+        data.message || "Result sheet submitted successfully."
+      );
+
       setElectionId("");
       setPollingUnitId("");
       setResultFile(null);
-
       event.target.reset();
+
+      // Reload the full database history after a successful upload.
+      await loadHistory(token);
     } catch (error) {
       setUploadError(
         error.message || "Unable to connect to the BallotLens server."
@@ -182,14 +229,22 @@ export default function AgentDashboard() {
           <span className="agent-card-icon">▤</span>
           <p>Submitted Result Sheets</p>
           <strong>{submittedSheets.length}</strong>
-          <small>Sheets submitted in this session</small>
+          <small>Saved submissions for your account</small>
         </article>
 
         <article className="agent-summary-card">
           <span className="agent-card-icon">◷</span>
           <p>Awaiting Review</p>
-          <strong>—</strong>
-          <small>Review data not connected yet</small>
+          <strong>
+            {
+              submittedSheets.filter((sheet) =>
+                ["submitted", "pending", "under_review"].includes(
+                  String(sheet.status || "").toLowerCase()
+                )
+              ).length
+            }
+          </strong>
+          <small>Submissions awaiting review</small>
         </article>
       </section>
 
@@ -264,16 +319,43 @@ export default function AgentDashboard() {
 
       <section className="agent-dashboard-content">
         <div className="agent-panel">
-          <h2>Recent Submissions</h2>
+          <div className="agent-history-heading">
+            <div>
+              <h2>Recent Submissions</h2>
+              <p>
+                Your saved result sheets and their current review status.
+              </p>
+            </div>
 
-          {submittedSheets.length === 0 ? (
+            <span className="agent-history-count">
+              {submittedSheets.length} total
+            </span>
+          </div>
+
+          {historyLoading ? (
+            <div className="agent-empty-state">
+              <p>Loading your submission history...</p>
+            </div>
+          ) : historyError ? (
+            <div className="agent-empty-state">
+              <h3>Unable to load submissions</h3>
+              <p className="agent-upload-error">{historyError}</p>
+
+              <button
+                type="button"
+                className="agent-primary-link"
+                onClick={() =>
+                  loadHistory(localStorage.getItem("ballotLensToken"))
+                }
+              >
+                Try Again
+              </button>
+            </div>
+          ) : submittedSheets.length === 0 ? (
             <div className="agent-empty-state">
               <span aria-hidden="true">▤</span>
-              <h3>No new submissions in this session</h3>
-              <p>
-                Successful uploads will appear here. Persistent submission
-                history will be connected to the backend next.
-              </p>
+              <h3>No submissions yet</h3>
+              <p>Your submitted result sheets will appear here.</p>
             </div>
           ) : (
             <div className="agent-submission-list">
@@ -282,22 +364,53 @@ export default function AgentDashboard() {
                   className="agent-submission-item"
                   key={sheet.id}
                 >
-                  <div>
+                  <div className="agent-submission-details">
                     <strong>
                       {sheet.original_filename || `Result sheet #${sheet.id}`}
                     </strong>
+
                     <p>
-                      Election #{sheet.election_id} · Polling unit #
-                      {sheet.polling_unit_id}
+                      {sheet.election_name || `Election #${sheet.election_id}`}
                     </p>
+
+                    <p>
+                      {sheet.polling_unit_name ||
+                        `Polling Unit #${sheet.polling_unit_id}`}
+                      {sheet.polling_unit_code
+                        ? ` (${sheet.polling_unit_code})`
+                        : ""}
+                    </p>
+
+                    {sheet.state_name && (
+                      <p>
+                        {sheet.state_name}
+                        {sheet.lga_name ? ` · ${sheet.lga_name}` : ""}
+                      </p>
+                    )}
+
                     <small>
+                      Submitted:{" "}
                       {sheet.uploaded_at
                         ? new Date(sheet.uploaded_at).toLocaleString()
-                        : "Recently submitted"}
+                        : "Date unavailable"}
                     </small>
+
+                    {sheet.reviewer_notes && (
+                      <p className="agent-reviewer-notes">
+                        <strong>Reviewer feedback:</strong>{" "}
+                        {sheet.reviewer_notes}
+                      </p>
+                    )}
                   </div>
-                  <span className="agent-submission-status">
-                    {sheet.status || "submitted"}
+
+                  <span
+                    className={`agent-submission-status status-${String(
+                      sheet.status || "submitted"
+                    )
+                      .toLowerCase()
+                      .replace(/[^a-z0-9]+/g, "-")}`}
+                  >
+                    {String(sheet.status || "submitted").replace(/_/g, " ")}
                   </span>
                 </article>
               ))}
