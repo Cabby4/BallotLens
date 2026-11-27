@@ -19,6 +19,13 @@ export default function AdminResultSheets() {
   const [actionError, setActionError] = useState("");
   const [actionSuccess, setActionSuccess] = useState("");
 
+  // Evidence preview state
+  const [previewSheet, setPreviewSheet] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
+  const [previewLoading, setPreviewLoading] = useState(false);
+  const [previewError, setPreviewError] = useState("");
+  const [previewingId, setPreviewingId] = useState(null);
+
   const loadSheets = useCallback(async () => {
     const token = localStorage.getItem("ballotLensToken");
     const savedUser = localStorage.getItem("ballotLensUser");
@@ -59,7 +66,8 @@ export default function AdminResultSheets() {
 
       if (!response.ok) {
         throw new Error(
-          data.message || "Unable to load result-sheet submissions."
+          data.message ||
+            "Unable to load result-sheet submissions."
         );
       }
 
@@ -76,6 +84,89 @@ export default function AdminResultSheets() {
   useEffect(() => {
     loadSheets();
   }, [loadSheets]);
+
+  // Release temporary browser image URLs when replaced or unmounted.
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
+
+  // Fetch evidence through the authenticated backend endpoint.
+  const handleViewEvidence = async (sheet) => {
+    const token = localStorage.getItem("ballotLensToken");
+
+    if (!token) {
+      navigate("/admin/login", { replace: true });
+      return;
+    }
+
+    setPreviewSheet(sheet);
+    setPreviewUrl("");
+    setPreviewError("");
+    setPreviewLoading(true);
+    setPreviewingId(sheet.id);
+
+    try {
+      const response = await fetch(
+        `${API_URL}/result-sheets/admin/${sheet.id}/evidence`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 401) {
+        localStorage.removeItem("ballotLensToken");
+        localStorage.removeItem("ballotLensUser");
+        navigate("/admin/login", { replace: true });
+        return;
+      }
+
+      if (!response.ok) {
+        let message = "Unable to load this evidence image.";
+
+        try {
+          const data = await response.json();
+          message = data.message || message;
+        } catch {
+          // The server may return a non-JSON error response.
+        }
+
+        throw new Error(message);
+      }
+
+      const contentType = response.headers.get("content-type") || "";
+
+      if (!contentType.startsWith("image/")) {
+        throw new Error(
+          "The server did not return an image. Check the evidence endpoint."
+        );
+      }
+
+      const imageBlob = await response.blob();
+      const objectUrl = URL.createObjectURL(imageBlob);
+
+      setPreviewUrl(objectUrl);
+    } catch (err) {
+      setPreviewError(
+        err.message || "An error occurred while loading evidence."
+      );
+    } finally {
+      setPreviewLoading(false);
+      setPreviewingId(null);
+    }
+  };
+
+  const closeEvidencePreview = () => {
+    setPreviewSheet(null);
+    setPreviewUrl("");
+    setPreviewError("");
+    setPreviewLoading(false);
+  };
 
   const reviewResultSheet = async (
     sheetId,
@@ -119,14 +210,19 @@ export default function AdminResultSheets() {
       }
 
       if (!response.ok) {
+        const debugInfo = data.debug
+          ? JSON.stringify(data.debug, null, 2)
+          : "";
+
         throw new Error(
-          data.message || "Unable to review this result sheet."
+          `${data.message || "Unable to review this result sheet."}${
+            debugInfo ? `\n\nDatabase details:\n${debugInfo}` : ""
+          }`
         );
       }
 
       setActionSuccess(
-        data.message ||
-          `Result sheet ${status} successfully.`
+        data.message || `Result sheet ${status} successfully.`
       );
 
       await loadSheets();
@@ -276,9 +372,8 @@ export default function AdminResultSheets() {
           <div>
             <h2>Submitted Evidence</h2>
             <p>
-              Review result-sheet submissions and their polling-unit
-              details. Record a decision only after the evidence has
-              been properly inspected.
+              Inspect uploaded evidence before approving or rejecting
+              a result sheet.
             </p>
           </div>
 
@@ -370,7 +465,7 @@ export default function AdminResultSheets() {
               role="alert"
               style={{ margin: "16px 0" }}
             >
-              <p>{actionError}</p>
+              <p style={{ whiteSpace: "pre-wrap" }}>{actionError}</p>
               <button
                 type="button"
                 onClick={() => setActionError("")}
@@ -462,9 +557,7 @@ export default function AdminResultSheets() {
                           </td>
 
                           <td>
-                            <span
-                              className={statusClass(sheet.status)}
-                            >
+                            <span className={statusClass(sheet.status)}>
                               {String(
                                 sheet.status || "unknown"
                               ).replace(/_/g, " ")}
@@ -472,65 +565,88 @@ export default function AdminResultSheets() {
                           </td>
 
                           <td>
-                            {reviewable ? (
-                              <div
+                            <div
+                              style={{
+                                display: "flex",
+                                gap: "8px",
+                                flexWrap: "wrap",
+                                alignItems: "center",
+                              }}
+                            >
+                              <button
+                                type="button"
+                                disabled={
+                                  previewLoading ||
+                                  reviewingId !== null
+                                }
+                                onClick={() => handleViewEvidence(sheet)}
                                 style={{
-                                  display: "flex",
-                                  gap: "8px",
-                                  flexWrap: "wrap",
+                                  padding: "8px 12px",
+                                  border: "1px solid #cbd5e1",
+                                  borderRadius: "6px",
+                                  background: "#fff",
+                                  color: "#1e293b",
+                                  cursor: "pointer",
+                                  opacity:
+                                    previewLoading ||
+                                    reviewingId !== null
+                                      ? 0.6
+                                      : 1,
                                 }}
                               >
-                                <button
-                                  type="button"
-                                  disabled={
-                                    reviewingId !== null || loading
-                                  }
-                                  onClick={() => handleApprove(sheet)}
-                                  style={{
-                                    padding: "8px 12px",
-                                    border: "none",
-                                    borderRadius: "6px",
-                                    background: "#176534",
-                                    color: "#fff",
-                                    cursor: "pointer",
-                                    opacity:
-                                      reviewingId !== null || loading
-                                        ? 0.6
-                                        : 1,
-                                  }}
-                                >
-                                  {isReviewing
-                                    ? "Processing..."
-                                    : "Approve"}
-                                </button>
+                                {previewingId === sheet.id
+                                  ? "Loading evidence..."
+                                  : "View Evidence"}
+                              </button>
 
-                                <button
-                                  type="button"
-                                  disabled={
-                                    reviewingId !== null || loading
-                                  }
-                                  onClick={() => handleReject(sheet)}
-                                  style={{
-                                    padding: "8px 12px",
-                                    border: "none",
-                                    borderRadius: "6px",
-                                    background: "#b42318",
-                                    color: "#fff",
-                                    cursor: "pointer",
-                                    opacity:
-                                      reviewingId !== null || loading
-                                        ? 0.6
-                                        : 1,
-                                  }}
-                                >
-                                  Reject
-                                </button>
-                              </div>
-                            ) : (
-                              <span>
-                                No action available
-                              </span>
-                            )}
+                              {reviewable ? (
+                                <>
+                                  <button
+                                    type="button"
+                                    disabled={
+                                      reviewingId !== null ||
+                                      loading ||
+                                      previewLoading
+                                    }
+                                    onClick={() => handleApprove(sheet)}
+                                    style={{
+                                      padding: "8px 12px",
+                                      border: "none",
+                                      borderRadius: "6px",
+                                      background: "#176534",
+                                      color: "#fff",
+                                      cursor: "pointer",
+                                    }}
+                                  >
+                                    {isReviewing
+                                      ? "Processing..."
+                                      : "Approve"}
+                                  </button>
+
+                                  <button
+                                    type="button"
+                                    disabled={
+                                      reviewingId !== null ||
+                                      loading ||
+                                      previewLoading
+                                    }
+                                    onClick={() => handleReject(sheet)}
+                                    style={{
+                                      padding: "8px 12px",
+                                      border: "none",
+                                      borderRadius: "6px",
+                                      background: "#b42318",
+                                      color: "#fff",
+                                      cursor: "pointer",
+                                    }}
+                                  >
+                                    Reject
+                                  </button>
+                                </>
+                              ) : (
+                                <span>No review action</span>
+                              )}
+                            </div>
                           </td>
                         </tr>
                       );
@@ -548,6 +664,159 @@ export default function AdminResultSheets() {
           Evidence must be inspected and verified before publication.
         </p>
       </main>
+
+      {/* Evidence preview modal */}
+      {previewSheet && (
+        <div
+          role="presentation"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              closeEvidencePreview();
+            }
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              closeEvidencePreview();
+            }
+          }}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            background: "rgba(10, 20, 35, 0.82)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "20px",
+          }}
+        >
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="evidence-preview-title"
+            style={{
+              width: "min(100%, 1000px)",
+              maxHeight: "92vh",
+              overflowY: "auto",
+              background: "#fff",
+              color: "#172033",
+              borderRadius: "14px",
+              padding: "20px",
+              boxShadow: "0 20px 70px rgba(0,0,0,0.3)",
+            }}
+          >
+            <header
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: "16px",
+                marginBottom: "18px",
+              }}
+            >
+              <div>
+                <h2
+                  id="evidence-preview-title"
+                  style={{ margin: "0 0 6px" }}
+                >
+                  Result Sheet Evidence
+                </h2>
+                <p style={{ margin: 0, overflowWrap: "anywhere" }}>
+                  {previewSheet.original_filename ||
+                    `Result sheet #${previewSheet.id}`}
+                  {" · "}Reference #{previewSheet.id}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={closeEvidencePreview}
+                aria-label="Close evidence preview"
+                style={{
+                  border: "none",
+                  background: "#edf1f5",
+                  borderRadius: "8px",
+                  padding: "8px 12px",
+                  cursor: "pointer",
+                  fontSize: "18px",
+                }}
+              >
+                ✕
+              </button>
+            </header>
+
+            {previewLoading && (
+              <div
+                role="status"
+                style={{
+                  padding: "48px 16px",
+                  textAlign: "center",
+                }}
+              >
+                Loading secure evidence preview...
+              </div>
+            )}
+
+            {previewError && (
+              <div
+                role="alert"
+                style={{
+                  padding: "16px",
+                  borderRadius: "8px",
+                  background: "#fef2f2",
+                  color: "#991b1b",
+                  whiteSpace: "pre-wrap",
+                }}
+              >
+                <strong>Evidence could not be loaded.</strong>
+                <p>{previewError}</p>
+                <button
+                  type="button"
+                  onClick={() => handleViewEvidence(previewSheet)}
+                  style={{
+                    padding: "8px 12px",
+                    border: "none",
+                    borderRadius: "6px",
+                    background: "#991b1b",
+                    color: "#fff",
+                    cursor: "pointer",
+                  }}
+                >
+                  Try again
+                </button>
+              </div>
+            )}
+
+            {previewUrl && !previewLoading && (
+              <img
+                src={previewUrl}
+                alt={`Evidence for result sheet ${previewSheet.id}`}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  maxHeight: "68vh",
+                  objectFit: "contain",
+                  background: "#f1f5f9",
+                  borderRadius: "8px",
+                }}
+              />
+            )}
+
+            <footer
+              style={{
+                marginTop: "18px",
+                paddingTop: "14px",
+                borderTop: "1px solid #e2e8f0",
+                fontSize: "13px",
+                color: "#64748b",
+              }}
+            >
+              This evidence is restricted to authorized administrators.
+              Inspect the original document before making a review decision.
+            </footer>
+          </section>
+        </div>
+      )}
     </div>
   );
 }
